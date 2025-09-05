@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coming Soon — Jain Studio</title>
+  <meta name="description" content="We’re crafting something beautiful. Launching soon." />
+  <meta property="og:title" content="Coming Soon — Jain Studio" />
+  <meta property="og:description" content="We’re crafting something beautiful. Launching soon." />
+  <meta property="og:type" content="website" />
+  <style>
+    :root {
+      --bg1: #0f172a;
+      --bg2: #1e293b;
+      --accent: #a78bfa;
+      --accent2: #22d3ee;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin:0; padding:0; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
+      background: radial-gradient(1200px 1200px at 80% -10%, rgba(167,139,250,.15), transparent 50%),
+                  radial-gradient(1000px 700px at -10% 110%, rgba(34,211,238,.12), transparent 60%),
+                  linear-gradient(160deg, var(--bg1), var(--bg2));
+      overflow-x: hidden;
+    }
+    .noise {
+      position: fixed; inset: 0; pointer-events: none; opacity:.05;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="n"><feTurbulence baseFrequency=".8" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".5"/></svg>');
+      mix-blend-mode: overlay;
+      z-index: 0;
+    }
+    .wrap { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 24px; }
+    .card {
+      width: min(720px, 92vw);
+      background: rgba(15,23,42,.55);
+      border: 1px solid rgba(226,232,240,.08);
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px rgba(0,0,0,.45);
+      padding: clamp(20px, 4vw, 40px);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .shine {
+      position: absolute; inset: -80px; filter: blur(40px);
+      background: conic-gradient(from 90deg, transparent 0 40%, rgba(167,139,250,.2) 50%, rgba(34,211,238,.25) 60%, transparent 80% 100%);
+      animation: spin 12s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    h1 { font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.05; margin: 0 0 12px; letter-spacing: .3px; }
+    .tag { display:inline-block; padding: 6px 12px; border:1px solid rgba(226,232,240,.12); border-radius:999px; font-size:.85rem; color: var(--muted); margin-bottom: 10px; }
+    p { margin: 0 0 18px; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.1rem); }
+    .count { display:flex; gap: 14px; margin: 18px 0 24px; flex-wrap: wrap; justify-content: center; }
+    .box { min-width: 70px; text-align:center; padding: 12px 10px; border-radius: 16px; border:1px solid rgba(226,232,240,.12); background: linear-gradient(180deg, rgba(148,163,184,.06), rgba(148,163,184,.02)); }
+    .num { font-weight: 700; font-size: 1.4rem; }
+    .lbl { font-size: .7rem; color: var(--muted); text-transform: uppercase; }
+    form { display:flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+    input[type=email] {
+      flex:1; min-width: 180px; padding: 14px 16px; border-radius: 14px; border:1px solid rgba(226,232,240,.14); background: rgba(2,6,23,.4);
+      color: var(--text); outline:none; font-size:1rem;
+    }
+    input[type=email]:focus { box-shadow: 0 0 0 3px rgba(167,139,250,.12); }
+    button { padding: 14px 18px; border-radius: 14px; border: 0; font-weight: 600; cursor: pointer; color: #0b1220;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 6px 20px rgba(34,211,238,.25), 0 2px 8px rgba(167,139,250,.25);
+    }
+    .foot { margin-top: 16px; font-size:.85rem; color: var(--muted); text-align:center; }
+    .logo { display:flex; align-items:center; gap:10px; margin-bottom:10px; color: var(--text); text-decoration:none; font-weight:700; }
+    .logo .dot { width: 10px; height: 10px; border-radius:999px; background: linear-gradient(90deg, var(--accent), var(--accent2)); box-shadow: 0 0 18px rgba(34,211,238,.7); }
+    .links { position: fixed; bottom: 16px; right: 16px; display:flex; gap:10px; flex-wrap: wrap; z-index: 2; }
+    .pill { font-size:.8rem; padding:8px 12px; border-radius:999px; border:1px solid rgba(226,232,240,.1); color: var(--muted); text-decoration:none; background: rgba(15,23,42,.6); }
+    .pill:hover { color: var(--text); border-color: rgba(226,232,240,.25); }
+
+    @media (max-width: 520px) {
+      .card { padding: 18px; border-radius: 18px; }
+      .num { font-size: 1.2rem; }
+      input[type=email] { padding: 12px; }
+      button { padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <main class="wrap">
+    <section class="card">
+      <div class="shine" aria-hidden="true"></div>
+      <a class="logo" href="#" aria-label="Brand home">
+        <span class="dot" aria-hidden="true"></span>
+        Jain Studio
+      </a>
+      <span class="tag">we're building something new</span>
+      <h1>Coming&nbsp;Soon</h1>
+      <p>We're in the workshop polishing pixels and prototypes. Drop your email and we’ll ping you when we launch.</p>
+
+      <div class="count" aria-label="Countdown">
+        <div class="box"><div class="num" id="d">00</div><div class="lbl">Days</div></div>
+        <div class="box"><div class="num" id="h">00</div><div class="lbl">Hours</div></div>
+        <div class="box"><div class="num" id="m">00</div><div class="lbl">Minutes</div></div>
+        <div class="box"><div class="num" id="s">00</div><div class="lbl">Seconds</div></div>
+      </div>
+
+      <!-- Updated Form -->
+      <form id="notify">
+        <input id="email" name="email" type="email" placeholder="your@email.com" required>
+        <button type="submit">Notify me</button>
+      </form>
+      <div class="foot">© <span id="year"></span> Jain Studio · All rights reserved.</div>
+    </section>
+  </main>
+
+  <div class="links">
+    <a class="pill" href="https://www.instagram.com/bnb.life_?igsh=MWxrdTNtZXJpNWZiOA%3D%3D&utm_source=qr" target="_blank">@bnb.life_</a>
+    <a class="pill" href="mailto:imingenious8@gmail.com">imingenious8@gmail.com</a>
+  </div>
+
+<script>
+/* ---------- Countdown (unchanged behavior) ---------- */
+const targetDate = new Date('2026-02-08T00:00:00');
+const els = {
+  d: document.getElementById('d'),
+  h: document.getElementById('h'),
+  m: document.getElementById('m'),
+  s: document.getElementById('s')
+};
+
+function updateCountdown(){
+  const now = new Date();
+  const diff = Math.max(0, targetDate - now);
+  const totalSeconds = Math.floor(diff / 1000);
+  const d = Math.floor(totalSeconds / 86400);
+  const h = Math.floor((totalSeconds % 86400) / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = totalSeconds % 60;
+  els.d.textContent = String(d).padStart(2, '0');
+  els.h.textContent = String(h).padStart(2, '0');
+  els.m.textContent = String(m).padStart(2, '0');
+  els.s.textContent = String(s).padStart(2, '0');
+}
+updateCountdown();
+const timerInterval = setInterval(updateCountdown, 1000);
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------- Email submit -> Google Apps Script (FormData) ---------- */
+const form = document.getElementById('notify');
+form.addEventListener('submit', async function(e){
+  e.preventDefault();
+  const emailEl = document.getElementById('email');
+  const email = emailEl && emailEl.value.trim();
+  if(!email){
+    alert('Please enter a valid email.');
+    return;
+  }
+
+  // ---------- PUT YOUR DEPLOYED WEB-APP URL HERE ----------
+  const scriptURL = "https://script.google.com/macros/s/AKfycbx1Q4wdz8WgUdXedNI1GAb5LLbLttHzPD0rHnbykLEJALYVze8XFP4tA6wJzD5LJDJd/exec";
+  // --------------------------------------------------------
+
+  // build FormData so Apps Script sees it as e.parameter.email
+  const fd = new FormData();
+  fd.append('email', email);
+
+  try {
+    const resp = await fetch(scriptURL, {
+      method: 'POST',
+      body: fd,
+      mode: 'cors'    // keep this
+    });
+
+    // read response text (Apps Script returns JSON or plain text)
+    const text = await resp.text();
+
+    if (!resp.ok) {
+      // Show server response in console for debugging
+      console.error('Server response not OK', resp.status, text);
+      alert('⚠️ Server returned an error. Check console (F12) → Network / Console for details.');
+      return;
+    }
+
+    // try parse JSON (if Apps Script returned JSON)
+    let json;
+    try { json = JSON.parse(text); } catch(e){ json = null; }
+
+    // Success — show confirmation + unlock game if present
+    alert('✅ Thanks! You\'ll be notified.');
+    form.reset();
+
+    // if you added unlock message / game placeholders, show them (safe guard: check existence)
+    const unlock = document.getElementById('unlock-message');
+    if(unlock) unlock.style.display = 'block';
+    const game = document.getElementById('game');
+    if(game) {
+      game.style.display = 'block';
+      game.scrollIntoView({ behavior: 'smooth' });
+    }
+    // Log server reply for debugging
+    console.log('Server reply:', json || text);
+
+  } catch (err) {
+    // Network/CORS/other error
+    console.error('Fetch error:', err);
+    alert('⚠️ Network error. Open devtools (F12) → Console / Network and paste the error here so I can help.');
+  }
+});
+</script>
+
+</body>
+</html>
