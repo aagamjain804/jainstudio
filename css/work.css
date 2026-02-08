@@ -1,0 +1,307 @@
+:root{
+  --bg:#05070b;
+  --glass: rgba(255,255,255,.06);
+  --border: rgba(255,255,255,.14);
+
+  --cool: rgba(120,255,255,.55);
+  --warm: rgba(255,186,110,.60);
+
+  --ease: cubic-bezier(.2,.8,.2,1);
+}
+
+*{ box-sizing:border-box }
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  background:var(--bg);
+  color:#fff;
+}
+
+
+/* ================= TOP BAR ================= */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+
+  display:flex;
+  align-items:center;
+  gap:20px;
+
+  padding:18px 26px;
+
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(16px);
+
+  border-bottom:1px solid var(--border);
+}
+
+.back{
+  text-decoration:none;
+  color:#fff;
+  font-size:14px;
+  opacity:.8;
+  transition:.2s;
+}
+.back:hover{opacity:1}
+
+.title{
+  font-size:13px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  opacity:.85;
+}
+
+
+/* ================= GRID ================= */
+
+.work{
+  max-width:1400px;
+  margin:50px auto;
+  padding:0 26px;
+
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:28px;
+}
+
+
+/* ================= CARD ================= */
+
+.card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+
+  text-decoration:none;
+  color:#fff;
+
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:20px;
+
+  overflow:hidden;
+
+  transition:
+    transform .35s var(--ease),
+    box-shadow .35s var(--ease),
+    border-color .35s var(--ease);
+}
+
+
+/* Image */
+
+.card__img{
+  position:relative;
+  width:100%;
+  height:190px;
+  overflow:hidden;
+}
+
+.card__img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+
+  filter:brightness(.92);
+  transition: transform .5s var(--ease), filter .4s;
+}
+
+
+/* Content */
+
+.card__body{
+  padding:18px 18px 20px;
+
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.card__title{
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:.01em;
+}
+
+.card__desc{
+  font-size:13px;
+  line-height:1.5;
+  opacity:.72;
+}
+
+
+/* Glow overlay */
+
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(400px 300px at 50% 0%,
+      rgba(120,255,255,.18),
+      rgba(0,0,0,0) 70%);
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:.35s var(--ease);
+}
+
+
+/* ================= HOVER ================= */
+
+.card:hover{
+  transform: translateY(-10px) scale(1.03);
+
+  border-color: rgba(120,255,255,.45);
+
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.7),
+    0 0 40px rgba(120,255,255,.18);
+}
+
+.card:hover img{
+  transform: scale(1.08);
+  filter:brightness(1.05);
+}
+
+.card:hover::after{
+  opacity:1;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1200px){
+  .work{
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+
+@media (max-width:900px){
+  .work{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media (max-width:520px){
+  .work{
+    grid-template-columns: 1fr;
+  }
+
+  .card__img{
+    height:210px;
+  }
+}
+
+/* Subtle Coming Box */
+
+.work-coming{
+  grid-column:1 / -1;
+
+  display:flex;
+  justify-content:center;
+
+  margin:60px 0 30px;
+}
+
+
+.work-coming p{
+  padding:10px 22px;
+
+  font-size:14px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+
+  color:rgba(220,255,255,0.9);
+
+  background:rgba(255,255,255,0.04);
+
+  border:1px solid rgba(120,255,255,0.25);
+  border-radius:999px;
+
+  backdrop-filter: blur(8px);
+
+  box-shadow:0 0 12px rgba(120,255,255,0.2);
+
+  transition:all .3s ease;
+}
+
+
+/* Soft Hover */
+
+.work-coming p:hover{
+  box-shadow:0 0 18px rgba(120,255,255,0.35);
+  transform:translateY(-1px);
+}
+
+/* Interiors Teaser Card */
+
+.interiors-cover{
+  height:100vh;
+  width:100%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:#0b0704;
+}
+
+
+/* Card */
+
+.interiors-card{
+  padding:50px 60px;
+
+  text-align:center;
+
+  border-radius:26px;
+
+  background:rgba(255,140,60,0.06);
+
+  border:1px solid rgba(255,170,90,0.35);
+
+  backdrop-filter: blur(12px);
+
+
+  box-shadow:
+    0 0 35px rgba(255,140,60,0.35),
+    inset 0 0 25px rgba(255,170,90,0.12);
+
+  max-width:520px;
+}
+
+
+/* Title */
+
+.interiors-card h1{
+  font-size:34px;
+
+  font-weight:500;
+
+  color:#ffb36a;
+
+  letter-spacing:.04em;
+
+  margin-bottom:16px;
+}
+
+
+/* Text */
+
+.interiors-card p{
+  font-size:16px;
+
+  line-height:1.6;
+
+  opacity:.9;
+
+  color:rgba(255,220,180,0.9);
+}

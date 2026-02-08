@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jain Studio — Graphics District</title>
+  <link rel="stylesheet" href="../css/district.css" />
+</head>
+<body>
+
+<div class="page-wrapper">
+<div class="district">
+
+   <!-- Top UI -->
+  <header class="hud">
+    <a class="hud__logo" href="../home.html" aria-label="Back to street">
+      <img src="../assets/images/logo.png" alt="Jain Studio" />
+    </a>
+    <div class="hud__title">Graphics District</div>
+  </header>
+
+  <div class="district-track">
+    <img class="district__bg" src="../assets/images/graphics_district2.png" alt="Graphics District" />
+
+  <!-- HOTSPOTS (edit links + positions) -->
+  <!-- 1) WORK (left front glass building) -->
+  <a class="hotspot"
+     href="../graphics/work_GD.html"
+     data-label="Work"
+     data-tone="cool"
+     style="left:2%; top:34%; width:28%; height:58%;">
+    <span class="hotspot__label">Work</span>
+  </a>
+
+  <!-- 2) SKILLS (left mid building panels) -->
+  <a class="hotspot"
+     href="../graphics/skills_GD.html"
+     data-label="Skills"
+     data-tone="cool"
+     style="left:27%; top:33%; width:18%; height:40%;">
+    <span class="hotspot__label">Skills</span>
+  </a>
+
+  <!-- 3) QUOTES (right tall building) -->
+  <a class="hotspot"
+     href="../graphics/quotes_GD.html"
+     data-label="Quotes"
+     data-tone="cool"
+     style="left:74%; top:24%; width:24%; height:62%;">
+    <span class="hotspot__label">Quotes</span>
+  </a>
+
+  <!-- 4) CONNECT (right mid doorway building) -->
+  <a class="hotspot"
+     href="../graphics/connect_GD.html"
+     data-label="Connect"
+     data-tone="cool"
+     style="left:62%; top:45%; width:16%; height:35%;">
+    <span class="hotspot__label">Connect</span>
+  </a>
+
+  <!-- 5) JAIN DESIGNS (center hero building) -->
+  <a class="hotspot hotspot--hero"
+     href="../graphics/jain-designs.html"
+     data-label="Jain Designs"
+     data-tone="cool"
+     style="left:40%; top:18%; width:22%; height:62%;">
+    <span class="hotspot__label">Jain Designs</span>
+  </a>
+  </div>
+
+  <div class="district__ambient" aria-hidden="true"></div>
+  <div class="district__glow" id="glow" aria-hidden="true"></div>
+
+  <footer class="hint">
+    Hover a building • Click to enter
+  </footer>
+
+<!-- Mobile Scroll Buttons -->
+<div class="scroll-btn left" id="scrollLeftBtn">‹</div>
+<div class="scroll-btn right" id="scrollRightBtn">›</div>
+</div>
+
+<script src="../js/district.js"></script>
+</body>
+</html>

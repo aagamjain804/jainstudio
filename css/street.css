@@ -1,0 +1,298 @@
+:root{
+  --bg:#05070b;
+  --white:#fff;
+
+  /* Theme accents (same as portal) */
+  --warm: rgba(255, 186, 110, 0.65);   /* interiors glow */
+  --cool: rgba(120, 255, 255, 0.55);   /* graphics glow */
+
+  --ease: cubic-bezier(.2,.8,.2,1);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--white);}
+
+.street{
+  position:relative;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+  background-size:cover;
+}
+
+@media(max-width:600px){
+
+  .street{
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-color:black;
+  }
+
+}
+
+
+.street__bg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  transform: scale(1.02);
+}
+
+/* Ambient premium overlay */
+.street__ambient{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(1000px 600px at 50% 20%, rgba(255,255,255,.10), rgba(255,255,255,0) 60%),
+    linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.45));
+  pointer-events:none;
+}
+
+/* Glow overlays: only affect the sides (match your ref) */
+.glow{
+  position:absolute; inset:0;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 320ms var(--ease), filter 320ms var(--ease);
+  filter: blur(0px);
+}
+
+.glow--left{
+  /* Warm glow on left 40% area */
+  background:
+    radial-gradient(600px 520px at 18% 40%, var(--warm), rgba(255,186,110,0) 70%),
+    linear-gradient(90deg, rgba(255,186,110,.35) 0%, rgba(255,186,110,0) 45%);
+  /* mask so it doesn't bleed into center/right too much */
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 42%, rgba(0,0,0,0) 58%);
+          mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 42%, rgba(0,0,0,0) 58%);
+}
+
+.glow--right{
+  /* Cool glow on right 40% area */
+  background:
+    radial-gradient(600px 520px at 82% 40%, var(--cool), rgba(120,255,255,0) 70%),
+    linear-gradient(270deg, rgba(120,255,255,.28) 0%, rgba(120,255,255,0) 45%);
+  -webkit-mask-image: linear-gradient(270deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 42%, rgba(0,0,0,0) 58%);
+          mask-image: linear-gradient(270deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 42%, rgba(0,0,0,0) 58%);
+}
+
+/* Hover zones */
+.zone{
+  position:absolute;
+  top:0; bottom:0;
+  width:50%;
+  text-decoration:none;
+  color:inherit;
+  z-index:3;
+}
+
+/* left and right clickable halves */
+.zone--left{ left:0; }
+.zone--right{ right:0; }
+
+/* Labels appear near bottom on hover */
+.zone__label{
+  position:absolute;
+  bottom:38px;
+  max-width:320px;
+  padding:14px 16px;
+  border-radius:16px;
+
+  opacity:0;
+  transform: translateY(10px);
+  transition: opacity 220ms var(--ease), transform 220ms var(--ease), background 220ms var(--ease), border-color 220ms var(--ease);
+
+  background: rgba(0,0,0,.20);
+  border: 1px solid rgba(255,255,255,.22);
+  backdrop-filter: blur(10px);
+}
+
+.zone__label--left{ left:22px; }
+.zone__label--right{ right:22px; text-align:right; }
+
+.zone__title{
+  font-weight:700;
+  letter-spacing:.02em;
+}
+.zone__sub{
+  font-size:12px;
+  opacity:.75;
+  margin-top:4px;
+}
+
+/* Center text */
+.center{
+  position:absolute;
+  left:50%;
+  top:52%;
+  transform: translate(-50%,-50%);
+  text-align:center;
+  z-index:2;
+  padding:0 18px;
+  pointer-events:none;
+}
+
+.center__kicker{
+  position: relative;
+  top: 1px;    /* up = negative */
+  left: 2px;   /* right = positive */
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  opacity:.8;
+  margin-bottom:10px;
+}
+.center__title{
+  margin:0;
+  font-size:clamp(26px, 3.2vw, 44px);
+  letter-spacing:.02em;
+}
+.center__sub{
+  margin:10px 0 0;
+  font-size:13px;
+  opacity:.72;
+}
+
+/* Hover effects driven by body classes (set in JS) */
+body.hover-left .glow--left{ opacity:1; filter: blur(0.5px); }
+body.hover-right .glow--right{ opacity:1; filter: blur(0.5px); }
+
+body.hover-left .zone__label--left{
+  opacity:1;
+  transform: translateY(0);
+  border-color: rgba(255,186,110,.45);
+  background: rgba(0,0,0,.28);
+}
+body.hover-right .zone__label--right{
+  opacity:1;
+  transform: translateY(0);
+  border-color: rgba(120,255,255,.40);
+  background: rgba(0,0,0,.28);
+}
+
+/* Optional: subtle background parallax */
+body.hover-left .street__bg{ transform: scale(1.03) translateX(-8px); transition: transform 420ms var(--ease); }
+body.hover-right .street__bg{ transform: scale(1.03) translateX(8px);  transition: transform 420ms var(--ease); }
+
+@media (max-width: 700px){
+  .zone__label{ max-width: 280px; bottom:22px; }
+  .zone__label--left{ left:14px; }
+  .zone__label--right{ right:14px; }
+}
+
+.street-wrapper{
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+}
+
+.street{
+  width:100%;
+  height:100%;
+
+  transform: scale(1.08);
+  opacity:0;
+
+  animation: streetZoom 1.4s ease-out forwards;
+}
+
+@keyframes streetZoom{
+  to{
+    transform: scale(1);
+    opacity:1;
+  }
+}
+
+@media(max-width:768px){
+
+  .street{
+    animation: streetZoom 1s ease-out forwards;
+  }
+
+}
+
+@media(max-width:900px){
+
+  .left-zone:hover,
+  .right-zone:hover{
+    all:unset;
+  }
+
+  .left-zone:active,
+  .right-zone:active{
+    background: rgba(0,0,0,.25);
+  }
+
+}
+
+@media(max-width:768px){
+
+  .center__kicker{
+    font-size:32px;
+    top:45%;
+  }
+
+}
+
+@media(max-width:768px){
+
+  .left-zone,
+  .right-zone{
+    width:50%;
+  }
+
+}
+
+/* Desktop helper text */
+.center__sub::after{
+  content:"Hover a side to preview • Click to enter";
+  font-size:18px;
+  letter-spacing:0.5px;
+}
+
+
+/* Mobile helper text */
+@media (max-width:700px){
+
+  .center__sub::after{
+    content:"Tap to preview • Tap again to enter";
+  }
+
+}
+
+/* Transition Overlay */
+
+#pageTransition{
+  position:fixed;
+  inset:0;
+  background:#000;
+  opacity:0;
+  pointer-events:none;
+  z-index:9999;
+
+  transition:opacity .4s ease;
+}
+
+
+/* Cinematic Move */
+
+body.enter-left{
+  transform: perspective(1200px)
+             rotateY(6deg)
+             scale(1.08);
+  transition: all .6s ease-in-out;
+}
+
+body.enter-right{
+  transform: perspective(1200px)
+             rotateY(-6deg)
+             scale(1.08);
+  transition: all .6s ease-in-out;
+}
+
+
+/* Prevent Scroll During Transition */
+body.transitioning{
+  overflow:hidden;
+}

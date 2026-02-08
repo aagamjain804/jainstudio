@@ -1,0 +1,342 @@
+:root{
+  --bg:#04070c;
+
+  --glass: rgba(255,255,255,.07);
+  --border: rgba(255,255,255,.14);
+
+  --cool: rgba(120,255,255,.6);
+  --warm: rgba(255,186,110,.55);
+
+  --ease: cubic-bezier(.2,.8,.2,1);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+
+  background: radial-gradient(circle at top, #09121f, #04070c 65%);
+  color:#fff;
+}
+
+
+/* ============ TOP BAR ============ */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+
+  display:flex;
+  align-items:center;
+  gap:20px;
+
+  padding:18px 26px;
+
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(16px);
+
+  border-bottom:1px solid var(--border);
+}
+
+.back{
+  text-decoration:none;
+  color:#fff;
+  opacity:.8;
+}
+.back:hover{opacity:1}
+
+.title{
+  font-size:13px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  opacity:.85;
+}
+
+
+/* ============ GRID ============ */
+
+.skills{
+  max-width:1300px;
+  margin:60px auto;
+  padding:0 26px;
+
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
+  gap:28px;
+}
+
+
+/* ============ CARD ============ */
+
+.skill-card{
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.09),
+    rgba(255,255,255,.02)
+  );
+
+  border:1px solid var(--border);
+  border-radius:22px;
+
+  padding:26px 22px 28px;
+
+  text-align:center;
+
+  backdrop-filter: blur(14px);
+
+  transition:
+    transform .35s var(--ease),
+    box-shadow .35s var(--ease),
+    border-color .35s var(--ease);
+}
+
+
+/* Icon */
+
+.skill-icon{
+  width:54px;
+  height:54px;
+  margin:0 auto 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(0,0,0,.35);
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+}
+
+.skill-icon img{
+  width:32px;
+  height:32px;
+  object-fit:contain;
+  border-radius: 6px;
+}
+
+
+/* Text */
+
+.skill-title{
+  font-size:17px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.skill-desc{
+  font-size:13px;
+  opacity:.72;
+  line-height:1.5;
+}
+
+
+/* Tag */
+
+.skill-tag{
+  display:inline-block;
+  margin-top:14px;
+
+  padding:6px 12px;
+  border-radius:999px;
+
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+
+  border:1px solid rgba(255,255,255,.18);
+  opacity:.8;
+}
+
+
+/* ============ HOVER ============ */
+
+.skill-card:hover{
+  transform: translateY(-8px) scale(1.03);
+
+  border-color: var(--cool);
+
+  box-shadow:
+    0 25px 55px rgba(0,0,0,.65),
+    0 0 30px rgba(120,255,255,.22);
+}
+
+
+/* Warm theme for interiors */
+body.warm .skill-card:hover{
+  border-color: var(--warm);
+  box-shadow:
+    0 25px 55px rgba(0,0,0,.65),
+    0 0 30px rgba(255,186,110,.25);
+}
+
+
+/* ============ RESPONSIVE ============ */
+
+@media(max-width:1200px){
+  .skills{ grid-template-columns: repeat(3,1fr); }
+}
+
+@media(max-width:900px){
+  .skills{ grid-template-columns: repeat(2,1fr); }
+}
+
+@media(max-width:520px){
+  .skills{ grid-template-columns: 1fr; }
+}
+
+.signature{
+  text-align:center;
+  margin:40px 0 10px;
+}
+
+.sig-badge{
+  display:inline-block;
+
+  padding:10px 22px;
+  border-radius:999px;
+
+  font-size:12px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+
+  background: linear-gradient(
+    120deg,
+    rgba(120,255,255,.25),
+    rgba(120,255,255,.05)
+  );
+
+  border:1px solid var(--cool);
+
+  box-shadow: 0 0 25px rgba(120,255,255,.25);
+}
+
+.sig-text{
+  margin-top:10px;
+  font-size:13px;
+  opacity:.75;
+}
+
+/* Skill Progress Bar */
+
+.skill-meter{
+  width:100%;
+  height:6px;
+  background:rgba(255,255,255,0.18);
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:14px;
+}
+
+
+.skill-meter span{
+  display:block;
+  height:100%;
+
+  width: var(--level);
+
+  background:linear-gradient(90deg,#6ffcff,#3bb6ff);
+  border-radius:10px;
+
+  box-shadow:0 0 10px rgba(111,252,255,0.6);
+
+  transform: scaleX(0);
+  transform-origin: left;
+
+  animation: fillMeter 1.4s ease-out forwards;
+}
+
+
+
+@keyframes fillMeter{
+  to{
+    transform: scaleX(1);
+  }
+}
+
+
+
+/* JS-free fallback */
+
+.skill-card::before{
+  content: attr(data-note);
+
+  position:absolute;
+  top:-10px;
+  left:50%;
+  transform: translateX(-50%) translateY(-10px);
+
+  background: rgba(0,0,0,.75);
+  padding:8px 12px;
+  border-radius:10px;
+
+  font-size:11px;
+  white-space:nowrap;
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:.25s var(--ease);
+}
+
+.skill-card:hover::before{
+  opacity:1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.strengths{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+
+  margin:30px auto 10px;
+  padding:0 20px;
+}
+
+.strengths div{
+  padding:8px 14px;
+  border-radius:999px;
+
+  font-size:11px;
+  letter-spacing:.08em;
+
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+
+  opacity:.8;
+}
+
+/* Interiors signature badge override */
+
+body.warm .sig-badge{
+  background: linear-gradient(
+    120deg,
+    rgba(255,165,80,.28),
+    rgba(255,165,80,.08)
+  );
+
+  border:1px solid var(--warm);
+
+  box-shadow: 0 0 25px rgba(255,140,60,.35);
+}
+
+
+/* Interiors Skill Meter Color */
+
+body.warm .skill-meter{
+  background:rgba(255,150,90,0.15);
+}
+
+
+body.warm .skill-meter span{
+  background:linear-gradient(
+    90deg,
+    #ffb46a,
+    #ff8c3c
+  );
+
+  box-shadow:
+    0 0 10px rgba(255,150,60,.6),
+    inset 0 0 6px rgba(255,180,100,.4);
+}

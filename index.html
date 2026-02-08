@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Jain Studio — Portal</title>
+  <link rel="stylesheet" href="./css/door.css" />
+</head>
+<body>
+
+  <!-- White flash overlay -->
+  <div id="flash" class="flash" aria-hidden="true"></div>
+
+  <!-- STAGE 1: Door -->
+  <section id="stage1" class="stage stage-portal">
+    <div class="video-wrap">
+      <video id="doorVideo" preload="auto" playsinline muted>
+        <source src="./assets/videos/door_open.mp4" type="video/mp4" />
+      </video>
+
+      <audio id="doorAudio" preload="auto">
+        <source src="./assets/videos/door_open.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+
+
+    <div class="overlay"></div>
+
+    <!--<div class="brand">Jain Studio</div> -->
+    <a class="brand" href="#" aria-label="Jain Studio">
+      <img src="./assets/images/logo.png" alt="Jain Studio logo" />
+    </a>
+
+
+    <div class="cta">
+      <button id="enterBtn" class="enter-btn" type="button" aria-label="Enter Studio">
+        ENTER STUDIO
+      </button>
+      <div class="cta-sub">Click to open the portal</div>
+    </div>
+  </section>
+
+  <!-- STAGE 2: Street -->
+  <section>
+    <img src="./assets/images/street_home.png" alt="Street hub" />
+    <div class="street-overlay"></div>
+  </section>
+
+  <script src="./js/door.js"></script>
+
+  <!-- Swoosh Sound -->
+<audio id="swooshSound" preload="auto">
+  <source src="./assets/audio/swoosh.mp3" type="audio/mp3">
+</audio>
+
+</body>
+</html>

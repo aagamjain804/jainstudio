@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jain Studio — Interiors District</title>
+  <link rel="stylesheet" href="../css/district.css" />
+</head>
+<body>
+<div class="page-wrapper">
+<div class="district">
+  
+  <!-- Top UI -->
+  <header class="hud">
+    <a class="hud__logo" href="../home.html" aria-label="Back to street">
+      <img src="../assets/images/logo.png" alt="Jain Studio" />
+    </a>
+    <div class="hud__title">Interiors District</div>
+  </header>
+
+  <div class="district-track">
+  <img class="district__bg" src="../assets/images/interiors_district2.png" alt="Interiors District" />
+
+  <!-- HOTSPOTS (edit links + positions) -->
+  <!-- 1) WORK (left foreground) -->
+  <a class="hotspot"
+     href="../interiors/work_ID.html"
+     data-label="Work"
+     data-tone="warm"
+     style="left:0%; top:26%; width:36%; height:72%;">
+    <span class="hotspot__label">Work</span>
+  </a>
+
+  <!-- 2) SKILLS (mid-left building) -->
+  <a class="hotspot"
+     href="../interiors/skills_ID.html"
+     data-label="Skills"
+     data-tone="warm"
+     style="left:25%; top:30%; width:20%; height:44%;">
+    <span class="hotspot__label">Skills</span>
+  </a>
+
+  <!-- 3) QUOTES (right big block) -->
+  <a class="hotspot"
+     href="../interiors/quotes_ID.html"
+     data-label="Quotes"
+     data-tone="warm"
+     style="left:73%; top:24%; width:26%; height:68%;">
+    <span class="hotspot__label">Quotes</span>
+  </a>
+
+  <!-- 4) CONNECT (right doorway) -->
+  <a class="hotspot"
+     href="../interiors/connect_ID.html"
+     data-label="Connect"
+     data-tone="warm"
+     style="left:57%; top:44%; width:18%; height:34%;">
+    <span class="hotspot__label">Connect</span>
+  </a>
+
+  <!-- 5) COMING SOON (construction / middle-right) -->
+  <a class="hotspot hotspot--hero"
+     href="../interiors/jain-interiors.html"
+     data-label="Coming Soon"
+     data-tone="warm"
+     style="left:43%; top:26%; width:22%; height:48%;">
+    <span class="hotspot__label">Coming Soon</span>
+  </a>
+  </div>
+
+  <div class="district__ambient" aria-hidden="true"></div>
+  <div class="district__glow" id="glow" aria-hidden="true"></div>
+
+  <footer class="hint">
+    Hover a building • Click to enter
+  </footer>
+
+<!-- Mobile Scroll Buttons -->
+<div class="scroll-btn left" id="scrollLeftBtn">‹</div>
+<div class="scroll-btn right" id="scrollRightBtn">›</div>
+</div>
+
+<script src="../js/district.js"></script>
+</body>
+</html>

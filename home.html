@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Jain Studio — Street</title>
+  <link rel="stylesheet" href="./css/street.css" />
+</head>
+<body>
+<div class="street-wrapper">
+  <div class="street">
+    <img class="street__bg" src="./assets/images/street_home.png" alt="Street hub" />
+
+    <!-- Ambient overlay for premium feel -->
+    <div class="street__ambient" aria-hidden="true"></div>
+
+    <!-- Glow overlays (masked to only affect the sides like your ref) -->
+    <div class="glow glow--left" aria-hidden="true"></div>
+    <div class="glow glow--right" aria-hidden="true"></div>
+
+    <!-- Click / hover zones -->
+    <a class="zone zone--left" data-link="./interiors/interiors.html" aria-label="Explore Interior District">
+      <div class="zone__label zone__label--left">
+        <div class="zone__title">Explore the Interior District</div>
+        <div class="zone__sub">Spatial stories • Materials • Atmosphere</div>
+      </div>
+    </a>
+
+    <a class="zone zone--right" data-link="./graphics/graphics.html" aria-label="Explore Graphics District">
+      <div class="zone__label zone__label--right">
+        <div class="zone__title">Explore the Graphics District</div>
+        <div class="zone__sub">Branding • Motion • Visual systems</div>
+      </div>
+    </a>
+
+    <!-- Center copy -->
+    <section class="center">
+      <div class="center__kicker">Jain Studio</div>
+      <h1 class="center__title">Explore me in two worlds</h1>
+      <p class="center__sub"></p>
+    </section>
+
+  </div>
+</div>
+
+  <script src="./js/street.js"></script>
+  <div id="pageTransition"></div>
+</body>
+</html>

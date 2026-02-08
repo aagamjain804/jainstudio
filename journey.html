@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Journey | Jain Studio</title>
+
+<style>
+
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  background:black;
+  overflow:hidden;
+  font-family:system-ui,Arial;
+}
+
+/* Video */
+
+video{
+  position:fixed;
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+  background:black;
+}
+
+
+
+/* White Flash */
+
+#flash{
+  position:fixed;
+  inset:0;
+  background:white;
+  opacity:1; /* Start ON */
+  pointer-events:none;
+  z-index:20;
+  transition:.15s linear;
+}
+
+#flash.off{
+  opacity:0;
+}
+
+#flash.on{
+  opacity:1;
+}
+
+
+/* Skip Button */
+
+#skipBtn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:30;
+
+  padding:10px 18px;
+
+  background:rgba(0,0,0,.65);
+  color:#fff;
+
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:20px;
+
+  cursor:pointer;
+  font-size:14px;
+
+  backdrop-filter: blur(12px);
+
+  box-shadow: 0 0 15px rgba(0,0,0,.4);
+
+  transition:.25s ease;
+}
+
+#skipBtn:hover{
+  background:rgba(0,0,0,.85);
+  border-color: rgba(120,255,255,.7);
+  box-shadow: 0 0 20px rgba(120,255,255,.5);
+  color:#fff;
+}
+
+@media(max-width:768px){
+
+  #skipBtn{
+    top:14px;
+    right:14px;
+    padding:8px 14px;
+    font-size:12px;
+  }
+
+}
+
+
+</style>
+</head>
+
+
+<body>
+
+<!-- Flash -->
+<div id="flash"></div>
+
+<!-- Skip -->
+<button id="skipBtn">Skip Journey</button>
+
+
+<!-- Video -->
+<video id="journeyVideo" playsinline preload="auto" autoplay>
+
+  <!-- Mobile -->
+  <source
+    src="./assets/videos/journey-mobile.mp4"
+    media="(max-width:600px)"
+    type="video/mp4"
+  >
+
+  <!-- Desktop + iPad -->
+  <source
+    src="./assets/videos/journey.mp4"
+    media="(min-width:601px)"
+    type="video/mp4"
+  >
+
+</video>
+
+
+
+<script>
+
+const video = document.getElementById("journeyVideo");
+const flash = document.getElementById("flash");
+const skipBtn = document.getElementById("skipBtn");
+
+let unlocked = false;
+
+
+/* Start flash */
+window.onload = () => {
+
+  video.play().catch(()=>{});
+
+  setTimeout(()=>{
+    flash.classList.add("off");
+  },120);
+};
+
+
+/* Enable sound */
+document.addEventListener("click", ()=>{
+
+  if(unlocked) return;
+
+  unlocked = true;
+
+  video.muted = false;
+  video.volume = 1;
+
+});
+
+
+/* End */
+video.addEventListener("ended", ()=>{
+
+  flash.classList.remove("off");
+  flash.classList.add("on");
+
+  setTimeout(()=>{
+    window.location.href = "./home.html";
+  },400);
+
+});
+
+
+/* Skip */
+skipBtn.addEventListener("click",(e)=>{
+
+  e.stopPropagation();
+
+  flash.classList.add("on");
+
+  setTimeout(()=>{
+    window.location.href = "./home.html";
+  },300);
+
+});
+
+</script>
+
+
+<style>
+
+#soundHint{
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+
+  background:rgba(0,0,0,.6);
+  color:#fff;
+
+  padding:10px 18px;
+  border-radius:20px;
+
+  font-size:13px;
+
+  z-index:25;
+
+  backdrop-filter: blur(10px);
+
+  transition:.4s;
+}
+
+</style>
+
+
+</body>
+
+</html>

@@ -1,0 +1,433 @@
+:root{
+  --bg:#05070b;
+  --white:#fff;
+
+  --cool: rgba(120,255,255,.55);
+  --warm: rgba(255,186,110,.60);
+
+  --ease: cubic-bezier(.2,.8,.2,1);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--white);}
+
+.district{
+  position:relative;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+}
+
+
+/* Allow scroll on mobile */
+@media(max-width:768px){
+
+  .district{
+    overflow-x:auto;
+    overflow-y:hidden;
+  }
+
+}
+
+
+.district__bg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  transform: scale(1.02);
+  transition: transform 420ms var(--ease), filter 420ms var(--ease);
+}
+
+.district__ambient{
+  position:fixed; inset:0;
+  background:
+    radial-gradient(1100px 650px at 50% 18%, rgba(255,255,255,.10), rgba(255,255,255,0) 60%),
+    linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.45));
+  pointer-events:none;
+  z-index:5;
+}
+
+/* Hover glow spotlight follows hovered hotspot (set by JS) */
+.district__glow{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 220ms var(--ease);
+  filter: blur(0.5px);
+}
+
+/* HUD */
+.hud{
+  position:absolute;
+  top:18px; left:18px; right:18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  z-index:10;
+  pointer-events:none;
+}
+.hud__logo{
+  pointer-events:auto;
+  display:inline-flex;
+  align-items:center;
+  padding:10px 12px;
+  border-radius:14px;
+  background: rgba(0,0,0,.16);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(10px);
+  text-decoration:none;
+}
+.hud__logo img{
+  height:26px;
+  width:auto;
+  display:block;
+  opacity:.92;
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,.35));
+}
+.hud__title{
+  pointer-events:none;
+  font-size:12px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  opacity:.82;
+}
+
+/* Hotspots */
+.hotspot{
+  position:absolute;
+  z-index:8;
+  text-decoration:none;
+  color:inherit;
+  border-radius:18px;
+  outline:none;
+
+  /* invisible, but still hoverable */
+  background: rgba(0,0,0,0);
+  border: 1px solid rgba(255,255,255,0);
+  transition: border-color 220ms var(--ease), transform 220ms var(--ease);
+}
+
+/* Label (appears on hover) */
+.hotspot__label{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+
+  padding:10px 12px;
+  border-radius:14px;
+  background: rgba(0,0,0,.18);
+  border: 1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(10px);
+
+  font-weight:700;
+  letter-spacing:.02em;
+
+  opacity:0;
+  transform: translateY(10px);
+  transition: opacity 220ms var(--ease), transform 220ms var(--ease), border-color 220ms var(--ease);
+}
+
+.hotspot:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.15);
+}
+.hotspot:hover .hotspot__label{
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* Hero building label centered */
+.hotspot--hero .hotspot__label{
+  left:50%;
+  transform: translate(-50%, 10px);
+  text-align:center;
+}
+.hotspot--hero:hover .hotspot__label{
+  transform: translate(-50%, 0);
+}
+
+/* Hint bottom */
+.hint{
+  position:absolute;
+  left:50%;
+  bottom:18px;
+  transform: translateX(-50%);
+  z-index:10;
+  font-size:12px;
+  opacity:.7;
+  letter-spacing:.08em;
+  padding:10px 12px;
+  border-radius:999px;
+  background: rgba(0,0,0,.14);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(10px);
+  pointer-events:none;
+}
+
+/* Subtle parallax on hover (optional) */
+body.is-hovering .district__bg{
+  transform: scale(1.03);
+  filter: saturate(1.02) contrast(1.02);
+}
+
+@media (max-width: 700px){
+  .hotspot__label{ left:12px; bottom:12px; }
+  .hud{ top:12px; left:12px; right:12px; }
+}
+
+.page-wrapper{
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+}
+
+
+.page-wrapper{
+  transform: scale(1.08);
+  opacity:0;
+
+  animation: districtZoom 1.2s ease-out forwards;
+}
+
+
+@keyframes districtZoom{
+  to{
+    transform: scale(1);
+    opacity:1;
+  }
+}
+
+@media(max-width:768px){
+
+  .page-wrapper{
+    animation: districtZoom .9s ease-out forwards;
+  }
+
+}
+
+/* ============================= */
+/* Mobile Horizontal District */
+/* ============================= */
+
+@media (max-width:768px){
+
+  .district{
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .district__bg{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    scroll-snap-align: start;
+  }
+
+  .page-wrapper{
+    overflow:hidden;
+  }
+
+  /* Each hotspot follows scroll */
+  .hotspot{
+    pointer-events:auto;
+  }
+
+  /* Bigger tap area */
+  .hotspot__label{
+    font-size:14px;
+    padding:12px 14px;
+  }
+
+  /* Mobile hint text */
+  .hint{
+    content:"";
+    font-size:11px;
+  }
+
+}
+
+/* Mobile Hint Override */
+
+@media (max-width:768px){
+
+  .hint::after{
+    content:"Tap to preview • Tap again to enter";
+  }
+
+  .hint{
+    font-size:11px;
+  }
+
+}
+
+/* Mobile First Tap Glow */
+
+@media (max-width:768px){
+
+  .hotspot.tap-active{
+    border-color:rgba(255,255,255,.25);
+    box-shadow:0 0 18px rgba(255,255,255,.25);
+  }
+
+  .hotspot.tap-active .hotspot__label{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+/* Mobile Scroll Buttons - Fixed */
+
+@media(max-width:768px){
+
+  .scroll-btn{
+    position:fixed;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+    line-height:1;
+
+    color:#fff;
+
+    background:rgba(0,0,0,0.5);
+
+    border:1px solid rgba(255,255,255,0.3);
+
+    box-shadow:0 0 15px rgba(120,255,255,0.4);
+
+    backdrop-filter:blur(6px);
+
+    z-index:9999;
+
+    cursor:pointer;
+    user-select:none;
+  }
+
+
+  .scroll-btn.left{
+    left:12px;
+  }
+
+  .scroll-btn.right{
+    right:12px;
+  }
+
+}
+
+/* Fixed Header on Mobile */
+
+@media(max-width:768px){
+
+  .hud{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:60px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 16px;
+
+    background:linear-gradient(
+      to bottom,
+      rgba(0,0,0,.65),
+      rgba(0,0,0,0)
+    );
+
+    z-index:9998;
+  }
+
+}
+
+/* Track container for mobile scroll */
+
+.district-track{
+  position:relative;
+  width:100%;
+  height:100%;
+}
+
+
+/* Mobile: expand track */
+
+@media(max-width:768px){
+
+  .district-track{
+    width:270vw;   /* reduced from 300vw */
+    height:100vh;
+  }
+
+}
+
+/* Mobile: Change hint text only (no hiding) */
+
+@media(max-width:768px){
+
+  .hint{
+    bottom:16px;
+    top:auto;
+
+    left:50%;
+    transform:translateX(-50%);
+
+    text-align:center;
+
+    font-size:11px;
+  }
+
+  .hint::after{
+    content:"";
+  }
+
+}
+
+/* Mobile: Center hint on first view */
+
+@media(max-width:768px){
+
+  .hint{
+    position:fixed;
+
+    top:90%;
+    left:50%;
+
+    bottom:auto;
+
+    transform:translate(-50%,-50%);
+
+    text-align:center;
+
+    font-size:12px;
+
+    padding:8px 18px;
+
+    background:rgba(0,0,0,0.45);
+
+    border-radius:999px;
+
+    backdrop-filter:blur(6px);
+
+    box-shadow:0 0 12px rgba(120,255,255,0.25);
+
+    z-index:80;
+  }
+
+}

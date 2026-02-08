@@ -1,0 +1,158 @@
+/* Reset */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+
+/* Page */
+
+.thankyou-page{
+  height:100vh;
+  width:100%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:
+    radial-gradient(circle at top,
+      rgba(120,255,255,0.12),
+      transparent 60%),
+    linear-gradient(180deg,#040a12,#02060a);
+
+  overflow:hidden;
+}
+
+
+/* Card */
+
+.thankyou-card{
+  position:relative;
+
+  padding:60px 70px;
+
+  text-align:center;
+
+  border-radius:26px;
+
+  background:rgba(255,255,255,0.04);
+
+  border:1px solid rgba(120,255,255,0.35);
+
+  backdrop-filter:blur(14px);
+
+  box-shadow:
+    0 0 40px rgba(120,255,255,0.25),
+    inset 0 0 20px rgba(120,255,255,0.08);
+
+  animation: cardEnter .9s ease-out;
+}
+
+
+/* Entrance Animation */
+
+@keyframes cardEnter{
+
+  from{
+    opacity:0;
+    transform:translateY(20px) scale(.96);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+
+/* Heading */
+
+.thankyou-card h1{
+  font-size:38px;
+
+  font-weight:500;
+
+  letter-spacing:.12em;
+  text-transform:uppercase;
+
+  color:#6ffcff;
+
+  text-shadow:0 0 25px rgba(120,255,255,.5);
+
+  margin-bottom:18px;
+}
+
+
+/* Text */
+
+.thankyou-card p{
+  font-size:16px;
+
+  line-height:1.6;
+
+  opacity:.85;
+
+  color:rgba(220,255,255,.9);
+
+  margin-bottom:32px;
+}
+
+
+/* Button */
+
+.back-btn{
+  display:inline-block;
+
+  padding:10px 26px;
+
+  font-size:13px;
+
+  letter-spacing:.08em;
+  text-transform:uppercase;
+
+  color:#6ffcff;
+  text-decoration:none;
+
+  border:1px solid rgba(120,255,255,.5);
+  border-radius:999px;
+
+  background:rgba(255,255,255,0.03);
+
+  backdrop-filter:blur(6px);
+
+  box-shadow:0 0 12px rgba(120,255,255,.2);
+
+  transition:all .3s ease;
+}
+
+
+/* Hover */
+
+.back-btn:hover{
+  background:rgba(120,255,255,.08);
+
+  box-shadow:0 0 20px rgba(120,255,255,.45);
+
+  transform:translateY(-1px);
+}
+
+
+/* Mobile */
+
+@media(max-width:600px){
+
+  .thankyou-card{
+    padding:45px 30px;
+    margin:0 20px;
+  }
+
+  .thankyou-card h1{
+    font-size:30px;
+  }
+
+}
